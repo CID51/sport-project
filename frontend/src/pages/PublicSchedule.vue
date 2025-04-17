@@ -132,9 +132,9 @@ const logout = () => {
 onMounted(async () => {
   try {
     const [ev, tm, lg] = await Promise.all([
-      axios.get(`${import.meta.env.VITE_API_URL}/api/events`),
-      axios.get(`${import.meta.env.VITE_API_URL}/api/teams`),
-      axios.get(`${import.meta.env.VITE_API_URL}/api/leagues`)
+      axios.get('/api/events'),
+      axios.get('/api/teams'),
+      axios.get('/api/leagues')
     ])
     events.value = ev.data
     teams.value = tm.data
