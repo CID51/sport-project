@@ -29,11 +29,13 @@ app.use('/api/teams', teamsRoutes);
 app.use('/api/', authRoutes); 
 app.use('/api/', protectRoutes);
 
-app.use('/api/*', (req, res) => {
+
+app.use('/api', (req, res) => {
   res.status(404).json({ message: 'API endpoint not found' });
 });
 
-app.use('*', (req, res) => {
+
+app.use((req, res) => {
   res.status(404).send('Page not found');
 });
 
