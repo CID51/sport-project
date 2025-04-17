@@ -3,7 +3,6 @@
     <div class="container">
       <h1 class="title is-4">Manage Teams</h1>
 
-
       <div class="box">
         <form @submit.prevent="submitTeam">
           <div class="field">
@@ -18,7 +17,6 @@
               />
             </div>
           </div>
-
 
           <div class="field" v-if="editingId && form.league">
             <label class="label">League</label>
@@ -99,7 +97,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 </template>
@@ -126,11 +123,10 @@ const form = ref({
 
 const editingId = ref(null)
 
-
 async function loadTeams() {
   try {
-    const res = await axios.get('/api/teams')
-    teams.value = [...res.data];
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/teams`)
+    teams.value = [...res.data]
   } catch (err) {
     console.error('Failed to load teams:', err)
   }
@@ -138,7 +134,7 @@ async function loadTeams() {
 
 async function loadLeagues() {
   try {
-    const res = await axios.get('/api/leagues')
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/leagues`)
     leagueOptions.value = res.data
   } catch (err) {
     console.error('Failed to load leagues:', err)
@@ -147,7 +143,7 @@ async function loadLeagues() {
 
 async function loadEvents() {
   try {
-    const res = await axios.get('/api/events')
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/events`)
     eventOptions.value = res.data
   } catch (err) {
     console.error('Failed to load events:', err)
@@ -158,14 +154,14 @@ async function submitTeam() {
   const payload = {
     name: form.value.name,
     season: form.value.season,
-    events: form.value.events
+    events: form.value.events,
   }
 
   try {
     if (editingId.value) {
-      await axios.put(`/api/teams/${editingId.value}`, payload, authConfig)
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/teams/${editingId.value}`, payload, authConfig)
     } else {
-      await axios.post('/api/teams/create', payload, authConfig)
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/teams/create`, payload, authConfig)
     }
     clearForm()
     await loadTeams()

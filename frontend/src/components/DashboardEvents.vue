@@ -166,19 +166,19 @@ const handleLocationSelect = (loc) => {
 
 const loadTeams = async () => {
   try {
-    const res = await axios.get('/api/teams')
-    teams.value = res.data
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/teams`);
+    teams.value = res.data;
   } catch (err) {
-    console.error('Failed to load teams:', err)
+    console.error('Failed to load teams:', err);
   }
 }
 
 const loadEvents = async () => {
   try {
-    const res = await axios.get('/api/events')
-    events.value = res.data
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/events`);
+    events.value = res.data;
   } catch (err) {
-    console.error('Failed to load events:', err)
+    console.error('Failed to load events:', err);
   }
 }
 
@@ -187,14 +187,14 @@ const submitEvent = async () => {
     form.value.what = form.value.what === true || form.value.what === 'true';
 
     if (editingId.value) {
-      await axios.put(`/api/events/${editingId.value}`, form.value, config)
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/events/${editingId.value}`, form.value, config);
     } else {
-      await axios.post('/api/events', form.value, config)
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/events`, form.value, config);
     }
-    clearForm()
-    await loadEvents()
+    clearForm();
+    await loadEvents();
   } catch (err) {
-    console.error('Failed to submit event:', err.response?.data || err.message)
+    console.error('Failed to submit event:', err.response?.data || err.message);
   }
 }
 
