@@ -10,17 +10,17 @@ import leagueRoutes from './routes/leagues.js';
 import mapsKeyRoute from './routes/maps.js';
 import protectRoutes from './routes/protected.js';
 import teamsRoutes from './routes/teams.js';
-
+import { apiProxy } from './proxyMiddleware.js';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
 app.use(cors());
 app.use(express.json());
 
+app.use(apiProxy);
 
 app.use('/api/maps', mapsKeyRoute);             
 app.use('/api/events', eventRoutes);
@@ -29,11 +29,9 @@ app.use('/api/teams', teamsRoutes);
 app.use('/api/', authRoutes); 
 app.use('/api/', protectRoutes);
 
-
 app.use('/api', (req, res) => {
   res.status(404).json({ message: 'API endpoint not found' });
 });
-
 
 app.use((req, res) => {
   res.status(404).send('Page not found');
