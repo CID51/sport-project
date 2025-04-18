@@ -76,7 +76,7 @@ const logout = () => {
 
 const login = async () => {
   try {
-    const response = await axios.post('/api/login', {
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, {
       username: username.value,
       password: password.value,
     });

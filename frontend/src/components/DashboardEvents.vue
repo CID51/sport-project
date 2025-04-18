@@ -166,21 +166,21 @@ const handleLocationSelect = (loc) => {
 
 const loadTeams = async () => {
   try {
-    const res = await axios.get('/api/teams') // Added /api prefix
-    teams.value = res.data
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/teams`);
+    teams.value = res.data;
   } catch (err) {
-    console.error('Failed to load teams:', err)
+    console.error('Failed to load teams:', err);
   }
-}
+};
 
 const loadEvents = async () => {
   try {
-    const res = await axios.get('/api/events') // Added /api prefix
-    events.value = res.data
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/events`);
+    events.value = res.data;
   } catch (err) {
-    console.error('Failed to load events:', err)
+    console.error('Failed to load events:', err);
   }
-}
+};
 
 const submitEvent = async () => {
   try {
@@ -196,7 +196,7 @@ const submitEvent = async () => {
   } catch (err) {
     console.error('Failed to submit event:', err.response?.data || err.message);
   }
-}
+};
 
 const editEvent = (event) => {
   editingId.value = event._id

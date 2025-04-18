@@ -31,17 +31,17 @@
   
   async function initMap() {
     try {
-      const { data: { key } } = await axios.get('/api/maps-key')
-      await loadGoogleMapsScript(key)
+      const { data: { key } } = await axios.get(`${import.meta.env.VITE_API_URL}/api/maps-key`);
+      await loadGoogleMapsScript(key);
   
-      const { data: coords } = await axios.get('/api/geocode', {
+      const { data: coords } = await axios.get(`${import.meta.env.VITE_API_URL}/api/geocode`, {
         params: { address: props.address }
-      })
+      });
   
       new google.maps.Map(mapContainer.value, {
         center: coords,
         zoom: 15
-      })
+      });
   
       new google.maps.Marker({
         position: coords,
@@ -49,11 +49,11 @@
           center: coords,
           zoom: 15
         })
-      })
+      });
   
-      mapLoaded.value = true
+      mapLoaded.value = true;
     } catch (err) {
-      console.error('Map load or geocode failed:', err)
+      console.error('Map load or geocode failed:', err);
     }
   }
   

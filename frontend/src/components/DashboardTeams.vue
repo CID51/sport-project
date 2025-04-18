@@ -125,28 +125,28 @@ const editingId = ref(null)
 
 async function loadTeams() {
   try {
-    const res = await axios.get('/api/teams') // Added /api prefix
-    teams.value = [...res.data]
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/teams`);
+    teams.value = [...res.data];
   } catch (err) {
-    console.error('Failed to load teams:', err)
+    console.error('Failed to load teams:', err);
   }
 }
 
 async function loadLeagues() {
   try {
-    const res = await axios.get('/api/leagues') // Added /api prefix
-    leagueOptions.value = res.data
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/leagues`);
+    leagueOptions.value = res.data;
   } catch (err) {
-    console.error('Failed to load leagues:', err)
+    console.error('Failed to load leagues:', err);
   }
 }
 
 async function loadEvents() {
   try {
-    const res = await axios.get('/api/events') // Added /api prefix
-    eventOptions.value = res.data
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/events`);
+    eventOptions.value = res.data;
   } catch (err) {
-    console.error('Failed to load events:', err)
+    console.error('Failed to load events:', err);
   }
 }
 

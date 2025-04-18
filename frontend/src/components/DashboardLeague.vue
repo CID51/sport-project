@@ -93,7 +93,7 @@ const editingId = ref(null)
 
 const loadTeams = async () => {
   try {
-    const res = await axios.get('/api/teams')
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/teams`)
     teamOptions.value = res.data
   } catch (err) {
     console.error('Failed to load teams:', err)
@@ -101,7 +101,7 @@ const loadTeams = async () => {
 }
 
 const loadLeagues = async () => {
-  const res = await axios.get('/api/leagues')
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/leagues`)
   leagues.value = res.data
 }
 
@@ -115,9 +115,9 @@ const submitLeague = async () => {
 
   try {
     if (editingId.value) {
-      await axios.put(`/api/leagues/${editingId.value}`, leagueData, config)
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/leagues/${editingId.value}`, leagueData, config)
     } else {
-      await axios.post('/api/leagues/create', leagueData, config)
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/leagues/create`, leagueData, config)
     }
     clearForm()
     loadLeagues()

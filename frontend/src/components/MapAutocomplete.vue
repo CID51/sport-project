@@ -17,7 +17,7 @@
   const input = ref(null)
   
   onMounted(async () => {
-    const { data } = await axios.get('/api/maps/maps-key')
+    const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/maps/maps-key`)
     const key = data.apiKey
   
     const script = document.createElement('script')
